@@ -2,44 +2,29 @@
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-create-dir?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-create-dir)
 
-Starter template for [unplugin](https://github.com/unjs/unplugin).
-
-## Template Usage
-
-To use this template, clone it down using:
-
-```bash
-npx degit unplugin/unplugin-create-dir my-unplugin
-```
-
-And do a global replacement of `unplugin-create-dir` with your plugin name.
-
-Then you can start developing your unplugin 🔥
-
-To test your plugin, run: `pnpm run dev`
-To release a new version, run: `pnpm run release`
-
 ## Install
 
 ```bash
-npm i unplugin-create-dir
+pnpm i -D unplugin-create-dir
 ```
+
+## Usage
 
 <details>
 <summary>Vite</summary><br>
 
 ```ts
 // vite.config.ts
-import Starter from 'unplugin-create-dir/vite'
+import CreateDir from 'unplugin-create-dir/vite'
 
 export default defineConfig({
   plugins: [
-    Starter({ /* options */ }),
+    CreateDir({
+      dirs: ['./pkg'],
+    })
   ],
 })
 ```
-
-Example: [`playground/`](./playground/)
 
 <br></details>
 
@@ -48,17 +33,35 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import Starter from 'unplugin-create-dir/rollup'
+import CreateDir from 'unplugin-limit-files/rollup'
 
 export default {
   plugins: [
-    Starter({ /* options */ }),
+    CreateDir({
+      /* options */
+    })
   ],
 }
 ```
 
 <br></details>
 
+<details>
+<summary>Rspack</summary><br>
+
+```ts
+// rspack.config.js
+module.exports = {
+  /* ... */
+  plugins: [
+    require('unplugin-create-dir/rspack')({
+      /* options */
+    }),
+  ],
+}
+```
+
+<br></details>
 
 <details>
 <summary>Webpack</summary><br>
@@ -68,26 +71,12 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-create-dir/webpack')({ /* options */ })
-  ]
+    require('unplugin-limit-files/webpack')({
+      /* options */
+    }),
+  ],
 }
 ```
-
-<br></details>
-
-<details>
-<summary>Nuxt</summary><br>
-
-```ts
-// nuxt.config.js
-export default defineNuxtConfig({
-  modules: [
-    ['unplugin-create-dir/nuxt', { /* options */ }],
-  ],
-})
-```
-
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
 
 <br></details>
 
@@ -99,7 +88,9 @@ export default defineNuxtConfig({
 module.exports = {
   configureWebpack: {
     plugins: [
-      require('unplugin-create-dir/webpack')({ /* options */ }),
+      require('unplugin-limit-files/webpack')({
+        /* options */
+      }),
     ],
   },
 }
@@ -113,10 +104,14 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
-import Starter from 'unplugin-create-dir/esbuild'
+import CreateDir from 'unplugin-limit-files/esbuild'
 
 build({
-  plugins: [Starter()],
+  plugins: [
+    CreateDir(
+    /* options */
+    )
+  ],
 })
 ```
 
